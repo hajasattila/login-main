@@ -1,7 +1,7 @@
-import customtkinter        #modern GUI
-import tkinter as tk        #üzenetek
-import subprocess           #subprocess ahhoz, hogyátirányítson a regisztrációs albakhoz
-import re                   #regural expression a jelszavakhoz
+import customtkinter  # modern GUI
+import tkinter as tk  # üzenetek
+import subprocess  # subprocess ahhoz, hogyátirányítson a regisztrációs albakhoz
+import re  # regural expression a jelszavakhoz
 from tkinter import *
 
 
@@ -13,8 +13,8 @@ customtkinter.set_default_color_theme("green")
 root = customtkinter.CTk()
 root.geometry("500x350")
 root.title("Bejelentkezés")
-  # Set the icon
-root.resizable(False,False)
+# Set the icon
+root.resizable(False, False)
 checkbox_var = tk.BooleanVar()
 
 
@@ -48,12 +48,12 @@ def login():
 
 def start_other_script():
     subprocess.run(["python", "registration.py"])
-    
-    
+
+
 def save_state():
     username = entry1.get()
     password = entry2.get()
-    if len(username) > 5 and len(password) > 5:
+    if len(username) >= 5 and len(password) >= 5:
         with open("checkbox.txt", "w+", encoding="utf8") as f:
             f.write("1" if checkbox_var.get() else "0")
             # Save the username and password in the file
@@ -76,11 +76,10 @@ def save_state():
                     f.write(f"Username: {username} , PW: {password}\n")
     except FileNotFoundError:
         pass
-            
-            
+
 def load_state():
     try:
-        with open("checkbox.txt", "r+",encoding="utf8") as f:
+        with open("checkbox.txt", "r+", encoding="utf8") as f:
             state = f.read()
             if state == "1":
                 checkbox_var.set(True)
@@ -88,6 +87,7 @@ def load_state():
                 checkbox_var.set(False)
     except FileNotFoundError:
         pass
+
 load_state()
 
 
@@ -102,28 +102,33 @@ label = customtkinter.CTkLabel(master=frame, text="Belépés")
 label.pack(pady=12, padx=10)
 
 
-entry1 = customtkinter.CTkEntry(master=frame, placeholder_text="Felhasználónév")
+entry1 = customtkinter.CTkEntry(
+    master=frame, placeholder_text="Felhasználónév")
 entry1.pack(pady=12, padx=10)
 
 
-entry2 = customtkinter.CTkEntry(master=frame, placeholder_text="Jelszó", show="*")
+entry2 = customtkinter.CTkEntry(
+    master=frame, placeholder_text="Jelszó", show="*")
 entry2.pack(pady=12, padx=10)
 
 
-button = customtkinter.CTkButton(master=frame, text="Bejelentkezés", command=login)
+button = customtkinter.CTkButton(
+    master=frame, text="Bejelentkezés", command=login)
 button.pack(pady=5, padx=100)
 button.bind("<Button>", login)
 
 
 customtkinter.set_default_color_theme("blue")
-button1 = customtkinter.CTkButton(master=frame, text="Regisztráció", command=start_other_script)
+button1 = customtkinter.CTkButton(
+    master=frame, text="Regisztráció", command=start_other_script)
 button1.pack(pady=5, padx=100)
 button1.bind("<Button-1>", start_other_script)
 # Bind the label to the callback function
 
 
 customtkinter.set_default_color_theme("green")
-checkbox = customtkinter.CTkCheckBox(master=frame, text="Emlékezz rám", variable=checkbox_var, command=save_state)
+checkbox = customtkinter.CTkCheckBox(
+    master=frame, text="Emlékezz rám", variable=checkbox_var, command=save_state)
 # Disable the checkbox
 checkbox.pack(pady=12, padx=10)
 
@@ -135,7 +140,7 @@ def load_u_p():
             line = f.readline()
             if checkbox_var.get():
                 try:
-                    u, p = re.findall(r"Username: (\w+) , PW: (\w+)", line)[0]    
+                    u, p = re.findall(r"Username: (\w+) , PW: (\w+)", line)[0]
                     entry1.insert(0, u)
                     entry2.insert(0, p)
                     line = f.readline()
@@ -143,8 +148,8 @@ def load_u_p():
                     checkbox_var.set(False)
     except FileNotFoundError:
         pass
+
+
 load_u_p()
 
-
 root.mainloop()
-
