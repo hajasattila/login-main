@@ -1,6 +1,7 @@
 import customtkinter
 import tkinter as tk
 import os
+import hashlib
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("blue")
@@ -18,7 +19,7 @@ def register():
 
     if not os.path.exists("users.txt"):
         # Create the file
-        with open("users.txt", "x") as f:
+        with open("users.txt", "x", encoding="utf-8") as f:
             pass
     # Validate the input
     if not username or not password:
@@ -42,7 +43,7 @@ def register():
         return
     
     # Check if the username is already taken
-    with open("users.txt", "r+", encoding="utf8") as f:
+    with open("users.txt", "r+", encoding="utf-8") as f:
         number = 1
         for line in f:
             number+=1
@@ -51,8 +52,8 @@ def register():
                 return
 
     # If the input is valid, write the user data to the file
-    with open("users.txt", "a+", encoding="utf8") as f:
-        
+    password = hashlib.sha256(password.encode("utf-8")).hexdigest()       #titkosítás a jelszóhoz.
+    with open("users.txt", "a+", encoding="utf-8") as f:
         f.write(f"{number}. Username: {username} , PW: {password}\n")
         
     # Clear the entry fields and show a success message
