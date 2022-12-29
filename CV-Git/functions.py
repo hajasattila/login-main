@@ -4,13 +4,14 @@ from tkinter import *
 import subprocess       # subprocess ahhoz, hogyátirányítson a regisztrációs albakhoz
 import hashlib
 
+#-------------------------------------------------Bejelentkezés----------------------------------------------------------------
 
 def login(e1, e2):
     print(type(e1))
 
     username = e1.get()
-    password = hashlib.sha256(e2.get().encode("utf-8")).hexdigest()     #loginhoz a titkosított jelszót átalakítja, és összehasonlítja
-    
+    # loginhoz a titkosított jelszót átalakítja, és összehasonlítja
+    password = hashlib.sha256(e2.get().encode("utf-8")).hexdigest()
     # Open the file in read mode
     with open("users.txt", "r+", encoding="utf8") as f:
         # Read the lines of the file
@@ -31,8 +32,9 @@ def login(e1, e2):
                 "Hiba!", "Nem sikerült belépni!")
             e1.delete(0, "end")
             e2.delete(0, "end")
-            
+
+#-------------------------------------------------Registration.py elindul gombnyomásra----------------------------------------------------------------
+
 
 def start_other_script():
     subprocess.run(["python", "registration.py"])
-

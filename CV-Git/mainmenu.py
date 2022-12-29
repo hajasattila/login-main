@@ -1,10 +1,9 @@
 import customtkinter  # modern GUI
 import tkinter as tk  # üzenetek
-import re  # regural expression a jelszavakhoz
-from tkinter import *
-import hashlib
+import re             # regural expression a jelszavakhoz
+from tkinter import *#vizualutás
 
-from functions import *
+from functions import * #functionokat innen hívom meg
 
 #-------------------------------------------------Kinézet----------------------------------------------------------------
 
@@ -14,12 +13,20 @@ customtkinter.set_default_color_theme("green")
 root = customtkinter.CTk()
 root.geometry("500x350")
 root.title("Bejelentkezés")
-# Set the icon
 root.resizable(False, False)
+
+#-------------------------------------------------Label, text változók----------------------------------------------------------------
+
+
 checkbox_var = tk.BooleanVar()
+reveal_state = tk.BooleanVar()
+password = tk.StringVar()
 
 
 #-------------------------------------------------Functions----------------------------------------------------------------
+
+
+#-------------------------------------------------UN és PW mentés----------------------------------------------------------------
 
 def save_state():
     username = entry1.get()
@@ -47,6 +54,19 @@ def save_state():
                     f.write(f"Username: {username} , PW: {password}\n")
     except FileNotFoundError:
         pass
+    
+#-------------------------------------------------PW megmutatása----------------------------------------------------------------
+
+
+def reveal_password():
+    if reveal_state.get():
+        # Update the show option to reveal the password
+        entry2.configure(show="")
+    else:
+        # Update the show option to hide the password
+        entry2.configure(show="*")
+
+#-------------------------------------------------Checkbox betöltése----------------------------------------------------------------
 
 
 def load_state():
@@ -60,7 +80,6 @@ def load_state():
     except FileNotFoundError:
         pass
 
-
 load_state()
 
 
@@ -70,35 +89,34 @@ load_state()
 frame = customtkinter.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill="both", expand=True)
 
-
 label = customtkinter.CTkLabel(master=frame, text="Belépés")
 label.pack(pady=12, padx=10)
-
 
 entry1 = customtkinter.CTkEntry(master=frame, placeholder_text="Felhasználónév")
 entry1.pack(pady=12, padx=10)
 
-
 entry2 = customtkinter.CTkEntry(master=frame, placeholder_text="Jelszó", show="*")
-entry2.pack(pady=12, padx=10)
+entry2.pack(pady=5, padx=10)
 
+reveal = customtkinter.CTkCheckBox(master=frame, text="Mutasd a jelszót!", variable=reveal_state, command=reveal_password)
+reveal.pack(pady=5, padx=10)
 
 button = customtkinter.CTkButton(master=frame, text="Bejelentkezés", command=lambda: login(entry1, entry2))
-button.pack(pady=5, padx=100)
+button.pack(pady=5, padx=10)
 button.bind("<Button>", lambda: login(entry1, entry2))
-
 
 customtkinter.set_default_color_theme("blue")
 button1 = customtkinter.CTkButton(master=frame, text="Regisztráció", command=start_other_script)
-button1.pack(pady=5, padx=100)
-button1.bind("<Button-1>", start_other_script)
+button1.pack(pady=5, padx=10)
 # Bind the label to the callback function
-
+button1.bind("<Button-1>", start_other_script)
 
 customtkinter.set_default_color_theme("green")
 checkbox = customtkinter.CTkCheckBox(master=frame, text="Emlékezz rám", variable=checkbox_var, command=save_state)
-# Disable the checkbox
 checkbox.pack(pady=12, padx=10)
+
+
+#-------------------------------------------------HA van elmentve un és pw betölti a futtatás előtt----------------------------------------------------------------
 
 
 def load_u_p():
@@ -119,4 +137,6 @@ def load_u_p():
 
 load_u_p()
 
+#Láthatatlanná teszi a filekat.
+""" os.system("attrib +h .usersSave.txt") """
 root.mainloop()
