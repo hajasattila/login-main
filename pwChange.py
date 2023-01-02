@@ -14,6 +14,8 @@ root = customtkinter.CTk()
 root.geometry("500x375")
 root.title("Password change")
 root.resizable(False, False)
+#Password reveal variable
+reveal_state = tk.BooleanVar()
 
 #-------------------------------------------------functions----------------------------------------------------------------
                 
@@ -64,7 +66,19 @@ def pwChange(*event):
         f.writelines(lines)
     tk.messagebox.showinfo("Siker!", "Sikeresen frissült a jelszavad!")
     root.destroy()
-
+    
+    
+def reveal_password():
+    if reveal_state.get():
+        # Update the show option to reveal the password
+        entry2.configure(show="")
+        entry3.configure(show="")
+        entry4.configure(show="")
+    else:
+        # Update the show option to hide the password
+        entry2.configure(show="*")
+        entry3.configure(show="*")
+        entry4.configure(show="*")
 #-------------------------------------------------Frontend----------------------------------------------------------------
 
 
@@ -72,22 +86,26 @@ frame = customtkinter.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill="both", expand=True)
 
 label = customtkinter.CTkLabel(master=frame, text="Jelszó változtatás")
-label.pack(pady=12, padx=10)
+label.pack(pady=10, padx=10)
 
 entry1 = customtkinter.CTkEntry(master=frame, placeholder_text="Felhasználónév")
-entry1.pack(pady=12, padx=10)
+entry1.pack(pady=10, padx=10)
 
 entry2 = customtkinter.CTkEntry(master=frame, placeholder_text="Régi jelszó", show="*")
-entry2.pack(pady=12, padx=10)
+entry2.pack(pady=10, padx=10)
 
 entry3 = customtkinter.CTkEntry(master=frame, placeholder_text="Új jelszó", show="*")
-entry3.pack(pady=12, padx=10)
+entry3.pack(pady=10, padx=10)
 
 entry4 = customtkinter.CTkEntry(master=frame, placeholder_text="Új jelszó mégegyszer", show="*")
-entry4.pack(pady=12, padx=10)
+entry4.pack(pady=10, padx=10)
+
+customtkinter.set_default_color_theme("green")
+reveal = customtkinter.CTkCheckBox(master=frame, text="Mutasd a jelszót!", variable=reveal_state, command=reveal_password)
+reveal.pack(pady=10, padx=10)
 
 button = customtkinter.CTkButton(master=frame, text="Megerősítés!", command=lambda: pwChange)
-button.pack(pady=5, padx=100)
+button.pack(pady=10, padx=10)
 button.bind("<Button-1>", pwChange)
 
 #Nem biztos még, hogy kelleni fog

@@ -3,12 +3,19 @@ import tkinter as tk
 import os
 import hashlib
 
+#-------------------------------------------------Alap beállítások----------------------------------------------------------------
+
+
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("blue")
 root = customtkinter.CTk()
 root.geometry("500x350")
 root.title("Regisztráció")
 root.resizable(False, False)
+#Password reveal variable
+reveal_state = tk.BooleanVar()
+
+#-------------------------------------------------Function----------------------------------------------------------------
 
 
 def register():
@@ -66,6 +73,22 @@ def register():
     root.destroy()
 
 
+#-------------------------------------------------PW megmutatása----------------------------------------------------------------
+
+    
+def reveal_password():
+    if reveal_state.get():
+        # Update the show option to reveal the password
+        entry2.configure(show="")
+        entry3.configure(show="")
+    else:
+        # Update the show option to hide the password
+        entry2.configure(show="*")
+        entry3.configure(show="*")
+
+#-------------------------------------------------Frontend----------------------------------------------------------------
+
+
 frame = customtkinter.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill="both", expand=True)
 
@@ -81,6 +104,11 @@ entry2.pack(pady=12, padx=10)
 entry3 = customtkinter.CTkEntry(master=frame, placeholder_text="Jelszó mégegyszer", show="*")
 entry3.pack(pady=12, padx=10)
 
+customtkinter.set_default_color_theme("green")
+reveal = customtkinter.CTkCheckBox(master=frame, text="Mutasd a jelszót!", variable=reveal_state, command=reveal_password)
+reveal.pack(pady=5, padx=10)
+
+customtkinter.set_default_color_theme("blue")
 button = customtkinter.CTkButton(master=frame, text="Regisztrálok!", command=register)
 button.pack(pady=5, padx=100)
 button.bind("<Button-1>", register)
