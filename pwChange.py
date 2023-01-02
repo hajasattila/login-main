@@ -1,8 +1,8 @@
 import customtkinter
 import tkinter as tk
 import re
-import os
 import hashlib
+from functions import *
 
 
 #-------------------------------------------------Baisc settings----------------------------------------------------------------
@@ -11,21 +11,11 @@ import hashlib
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("blue")
 root = customtkinter.CTk()
-root.geometry("500x350")
+root.geometry("500x375")
 root.title("Password change")
 root.resizable(False, False)
 
 #-------------------------------------------------functions----------------------------------------------------------------
-""" if newPassword != newPasswordagain:
-        tk.messagebox.showerror(
-            "Hiba!", "Nem egyeznek a jelszavak!")
-        return
-    
-    if not username or not oldPassword or not newPasswordagain or not newPasswordagain:
-        tk.messagebox.showerror(
-            "Hiba!", "Ne hagyj üresen mezőt!!")
-        return """
-
                 
 def pwChange(*event):
     # Get the user input
@@ -46,11 +36,15 @@ def pwChange(*event):
     if not username or not oldPassword or not newPassword or not newPasswordagain:
         tk.messagebox.showerror("Hiba!", "Ne hagyj üresen mezőt!")
         return
+    
+    if len(newPassword) < 5:
+        tk.messagebox.showerror("Figyelmeztetés!", "Vigyázz! \n5 karakternél rövidebb a jelszavad!")
+        return
 
     # Hash the old password for comparison
     hashed_old_password = hashlib.sha256(oldPassword.encode("utf-8")).hexdigest()
 
-    with open("users.txt", "r", encoding="utf8") as f:
+    with open("users.txt", "r", encoding="utf-8") as f:
         lines = f.readlines()
 
     # Check if the username and password match
@@ -66,10 +60,10 @@ def pwChange(*event):
         tk.messagebox.showerror("Hiba!", "Nem sikerült frissíteni a jelszót!")
         return
     
-    with open("users.txt", "w", encoding="utf8") as f:
+    with open("users.txt", "w", encoding="utf-8") as f:
         f.writelines(lines)
     tk.messagebox.showinfo("Siker!", "Sikeresen frissült a jelszavad!")
-
+    root.destroy()
 
 #-------------------------------------------------Frontend----------------------------------------------------------------
 
@@ -95,6 +89,11 @@ entry4.pack(pady=12, padx=10)
 button = customtkinter.CTkButton(master=frame, text="Megerősítés!", command=lambda: pwChange)
 button.pack(pady=5, padx=100)
 button.bind("<Button-1>", pwChange)
+
+#Nem biztos még, hogy kelleni fog
+""" label1 = customtkinter.CTkLabel(master=frame, text="Mainmenu", cursor="hand2")
+label1.pack(pady=5, padx=10)
+label1.bind("<Button-1>", start_mainmenu_script) """
 
 
 root.mainloop()

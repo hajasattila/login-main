@@ -2,7 +2,6 @@ import customtkinter  # modern GUI
 import tkinter as tk  # üzenetek
 import re             # regural expression a jelszavakhoz
 from tkinter import *#vizualutás
-
 from functions import * #functionokat innen hívom meg
 
 #-------------------------------------------------Kinézet----------------------------------------------------------------

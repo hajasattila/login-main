@@ -35,10 +35,15 @@ def login(e1, e2):
 
 #-------------------------------------------------Registration.py elindul gombnyomásra----------------------------------------------------------------
 
+#Ha csillag van, bármennyi paraméter kaphat
 
-def start_other_script():
+def start_other_script(*event):
     subprocess.run(["python", "registration.py"])
     
 
-def start_pwChange_script(event):
+def start_pwChange_script(*event):
     subprocess.run(["python", "pwChange.py"])
+    
+#Nem biztos még
+""" def start_mainmenu_script(event):
+    subprocess.run(["python", "mainmenu.py"]) """
