@@ -51,7 +51,6 @@ def register():
                 tk.messagebox.showerror(
                     "Hiba!", "Ez a felhasználónév, már foglalt!")
                 return
-
     # If the input is valid, write the user data to the file
     # titkosítás a jelszóhoz.
     password = hashlib.sha256(password.encode("utf-8")).hexdigest()
