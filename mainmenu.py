@@ -13,6 +13,7 @@ root = customtkinter.CTk()
 root.geometry("500x350")
 root.title("Bejelentkezés")
 root.resizable(False, False)
+root.iconbitmap(r'images/favicon.ico')
 
 #-------------------------------------------------Label, text változók----------------------------------------------------------------
 
@@ -105,7 +106,7 @@ button.pack(pady=5, padx=10)
 button.bind("<Button>", lambda: login(entry1, entry2))
 
 customtkinter.set_default_color_theme("blue")
-button1 = customtkinter.CTkButton(master=frame, text="Regisztráció", command=start_other_script)
+button1 = customtkinter.CTkButton(master=frame, text="Regisztráció", cursor="hand2")
 button1.pack(pady=5, padx=10)
 # Bind the label to the callback function
 button1.bind("<Button-1>", start_other_script)

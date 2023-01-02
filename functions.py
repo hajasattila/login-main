@@ -37,7 +37,7 @@ def login(e1, e2):
 
 #Ha csillag van, bármennyi paraméter kaphat
 
-def start_other_script(*event):
+def start_other_script(event):
     subprocess.run(["python", "registration.py"])
     
 

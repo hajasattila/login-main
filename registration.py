@@ -14,6 +14,7 @@ root.title("Regisztráció")
 root.resizable(False, False)
 #Password reveal variable
 reveal_state = tk.BooleanVar()
+root.iconbitmap(r'images/favicon.ico')
 
 #-------------------------------------------------Function----------------------------------------------------------------
 
