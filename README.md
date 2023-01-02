@@ -1,6 +1,6 @@
 # login
 
-My first own login and registration program. Written in python, with a simple GUI. 
+My first login and registration program. Written in python, with a simple GUI. 
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -19,7 +19,10 @@ Libraries in the program, what I am working with:
 
 
 If these are not installed, it's not possible to run the program from the editor.
-    Install command:    - pip install "nameOfTheLibrary"
+
+Installing command:    
+    
+    pip install "nameOfTheLibrary"
 
 
 Rules apply to registration:
@@ -53,7 +56,10 @@ A programban szereplő könyvtárak, amikkel dolgozom:
     os -> Operációs rendszer parancsok
 
 Ha ezek nincsenek telepítve, a program nem futtatható a szerkesztőből.
-    Telepítési parancs:     - pip install "konyvtarNeve"
+
+Telepítési parancs:    
+    
+    pip install "konyvtarNeve"
 
 
 Szabályok vonatkoznak a regisztrációhoz:
