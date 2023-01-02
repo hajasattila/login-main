@@ -12,7 +12,7 @@ Libraries in the program, what I am working with:
 
 
     customtkinter -> for the simple, and fast prebuild GUI
-        tkinter -> simple messages
+    tkinter -> simple messages
     re -> regular expressions
     hashlib -> password security
     os -> for basic Operating System commands
@@ -50,7 +50,7 @@ HU:
 A programban szereplő könyvtárak, amikkel dolgozom: 
 
     customtkinter -> előre létrehozott gyors GUI
-        tkinter -> egyszerű üzenetek
+    tkinter -> egyszerű üzenetek
     re -> reguláris kifejezések
     hashlib -> jelszó biztonság
     os -> Operációs rendszer parancsok
