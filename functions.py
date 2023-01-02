@@ -38,3 +38,7 @@ def login(e1, e2):
 
 def start_other_script():
     subprocess.run(["python", "registration.py"])
+    
+
+def start_pwChange_script(event):
+    subprocess.run(["python", "pwChange.py"])

@@ -90,10 +90,10 @@ frame = customtkinter.CTkFrame(master=root)
 frame.pack(pady=20, padx=60, fill="both", expand=True)
 
 label = customtkinter.CTkLabel(master=frame, text="Belépés")
-label.pack(pady=12, padx=10)
+label.pack(pady=10, padx=10)
 
 entry1 = customtkinter.CTkEntry(master=frame, placeholder_text="Felhasználónév")
-entry1.pack(pady=12, padx=10)
+entry1.pack(pady=5, padx=10)
 
 entry2 = customtkinter.CTkEntry(master=frame, placeholder_text="Jelszó", show="*")
 entry2.pack(pady=5, padx=10)
@@ -111,9 +111,15 @@ button1.pack(pady=5, padx=10)
 # Bind the label to the callback function
 button1.bind("<Button-1>", start_other_script)
 
+
+label1 = customtkinter.CTkLabel(master=frame, text="Jelszó megváltoztatása", cursor="hand2")
+label1.pack(pady=5, padx=10)
+label1.bind("<Button-1>", start_pwChange_script)
+
+
 customtkinter.set_default_color_theme("green")
 checkbox = customtkinter.CTkCheckBox(master=frame, text="Emlékezz rám", variable=checkbox_var, command=save_state)
-checkbox.pack(pady=12, padx=10)
+checkbox.pack(pady=5, padx=10)
 
 
 #-------------------------------------------------HA van elmentve un és pw betölti a futtatás előtt----------------------------------------------------------------
