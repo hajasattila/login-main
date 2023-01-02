@@ -13,7 +13,7 @@ def login(e1, e2):
     # loginhoz a titkosított jelszót átalakítja, és összehasonlítja
     password = hashlib.sha256(e2.get().encode("utf-8")).hexdigest()
     # Open the file in read mode
-    with open("users.txt", "r+", encoding="utf8") as f:
+    with open("txt/users.txt", "r+", encoding="utf8") as f:
         # Read the lines of the file
         line = f.readline()
         while line:
