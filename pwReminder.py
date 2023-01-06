@@ -1,9 +1,6 @@
 import customtkinter
 import tkinter as tk
-import os
-import hashlib
-import string
-import random
+from tkinter import *
 
 #-------------------------------------------------Alap beállítások----------------------------------------------------------------
 
@@ -21,8 +18,16 @@ root.iconbitmap(r'images/favicon.ico')
 #-------------------------------------------------Function----------------------------------------------------------------
 
 
+def check_entries():
+    name = entry1.get()
+    email = entry2.get()
 
-
+    if not name or not email:
+        tk.messagebox.showerror("Hiba!", "Töltsd ki az össze mezőt!")
+        return
+    print("All the entries are filled out.")
+    
+    
 #-------------------------------------------------PW megmutatása----------------------------------------------------------------
 
 
@@ -46,9 +51,8 @@ entry2 = customtkinter.CTkEntry(master=frame, placeholder_text="E-mail cím")
 entry2.pack(pady=18, padx=10)
 
 customtkinter.set_default_color_theme("blue")
-button = customtkinter.CTkButton(master=frame, text="Kérem az új jelszót!")
+button = customtkinter.CTkButton(master=frame, text="Kérem az új jelszót!", command=check_entries)
 button.pack(pady=18, padx=10)
-button.bind("<Button-1>")
 
 label = customtkinter.CTkLabel(
     master=frame, text="Az elfelejtett jelszót e-mailben fogjuk elküldeni! \nMiután megérkezett az üzenet, érdemes megváltoztatni \naz első bejelntkezés előtt!")
