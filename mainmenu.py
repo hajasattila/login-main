@@ -120,10 +120,11 @@ label1 = customtkinter.CTkLabel(master=frame, text="Jelszó megváltoztatása", 
 label1.pack(pady=5, padx=10)
 label1.bind("<Button-1>", start_pwChange_script)
 
-label2 = customtkinter.CTkLabel(master=frame, text="Elfelejtett jelszó?", cursor="hand2")
+#Maybe egyszer
+""" label2 = customtkinter.CTkLabel(master=frame, text="Elfelejtett jelszó?", cursor="hand2")
 label2.pack(pady=5, padx=10)
 label2.bind("<Button-1>", start_pwChange_script)
-label2.configure(font=("Arial", 12))
+label2.configure(font=("Arial", 12)) """
 
 
 
