@@ -2,6 +2,8 @@ import customtkinter
 import tkinter as tk
 import os
 import hashlib
+import string
+import random
 
 #-------------------------------------------------Alap beállítások----------------------------------------------------------------
 
@@ -27,7 +29,7 @@ def register():
 
     if not os.path.exists("users.txt"):
         # Create the file
-        with open("txt/users.txt", "x", encoding="utf-8") as f:
+        with open("users.txt", "x", encoding="utf-8") as f:
             pass
     # Validate the input
     if not username or not password:
@@ -51,7 +53,7 @@ def register():
         return
 
     # Check if the username is already taken
-    with open("txt/users.txt", "r+", encoding="utf-8") as f:
+    with open("users.txt", "r+", encoding="utf-8") as f:
         number = 1
         for line in f:
             number += 1
@@ -62,7 +64,7 @@ def register():
     # If the input is valid, write the user data to the file
     # titkosítás a jelszóhoz.
     password = hashlib.sha256(password.encode("utf-8")).hexdigest()
-    with open("txt/users.txt", "a+", encoding="utf-8") as f:
+    with open("users.txt", "a+", encoding="utf-8") as f:
         f.write(f"{number}. Username: {username} , PW: {password}\n")
 
     # Clear the entry fields and show a success message
@@ -86,6 +88,22 @@ def reveal_password():
         # Update the show option to hide the password
         entry2.configure(show="*")
         entry3.configure(show="*")
+        
+        
+def generate_password():
+    characters = string.ascii_letters + string.digits
+    password_length = random.randint(6, 16)
+    password = ''.join(random.choice(characters)for i in range(password_length))
+    return password
+
+
+def on_button_click():
+    password = generate_password()
+    entry2.delete(0, 'end')
+    entry2.insert(0, password)
+    entry3.delete(0, 'end')
+    entry3.insert(0, password)
+    
 
 #-------------------------------------------------Frontend----------------------------------------------------------------
 
@@ -108,6 +126,10 @@ entry3.pack(pady=12, padx=10)
 customtkinter.set_default_color_theme("green")
 reveal = customtkinter.CTkCheckBox(master=frame, text="Mutasd a jelszót!", variable=reveal_state, command=reveal_password)
 reveal.pack(pady=5, padx=10)
+
+customtkinter.set_default_color_theme("blue")
+button = customtkinter.CTkButton(master=frame, text="Random jelszó!", command=on_button_click)
+button.pack(pady=5, padx=100)
 
 customtkinter.set_default_color_theme("blue")
 button = customtkinter.CTkButton(master=frame, text="Regisztrálok!", command=register)

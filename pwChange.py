@@ -47,7 +47,7 @@ def pwChange(*event):
     # Hash the old password for comparison
     hashed_old_password = hashlib.sha256(oldPassword.encode("utf-8")).hexdigest()
 
-    with open("txt/users.txt", "r", encoding="utf-8") as f:
+    with open("users.txt", "r", encoding="utf-8") as f:
         lines = f.readlines()
 
     # Check if the username and password match
@@ -63,7 +63,7 @@ def pwChange(*event):
         tk.messagebox.showerror("Hiba!", "Nem sikerült frissíteni a jelszót!")
         return
     
-    with open("txt/users.txt", "w", encoding="utf-8") as f:
+    with open("users.txt", "w", encoding="utf-8") as f:
         f.writelines(lines)
     tk.messagebox.showinfo("Siker!", "Sikeresen frissült a jelszavad!")
     root.destroy()

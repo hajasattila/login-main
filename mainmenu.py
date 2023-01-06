@@ -32,11 +32,11 @@ def save_state():
     username = entry1.get()
     password = entry2.get()
     if len(username) >= 5 and len(password) >= 5:
-        with open("txt/checkbox.txt", "w+", encoding="utf-8") as f:
+        with open("checkbox.txt", "w+", encoding="utf-8") as f:
             f.write("1" if checkbox_var.get() else "0")
             # Save the username and password in the file
     try:
-        with open("txt/usersSave.txt", "w+", encoding="utf-8") as f:
+        with open("usersSave.txt", "w+", encoding="utf-8") as f:
             f.write(f"Username: {username} , PW: {password}\n")
             # Read the lines of the file
             line = f.readline()
@@ -50,7 +50,7 @@ def save_state():
                 line = f.readline()
             else:
                 # Write the username and password to the file if they do not already exist
-                with open("txt/usersSave.txt", "a", encoding="utf-8") as f:
+                with open("usersSave.txt", "a", encoding="utf-8") as f:
                     f.write(f"Username: {username} , PW: {password}\n")
     except FileNotFoundError:
         pass
@@ -71,7 +71,7 @@ def reveal_password():
 
 def load_state():
     try:
-        with open("txt/checkbox.txt", "r+", encoding="utf-8") as f:
+        with open("checkbox.txt", "r+", encoding="utf-8") as f:
             state = f.read()
             if state == "1":
                 checkbox_var.set(True)
@@ -101,6 +101,10 @@ entry2.pack(pady=5, padx=10)
 reveal = customtkinter.CTkCheckBox(master=frame, text="Mutasd a jelszót!", variable=reveal_state, command=reveal_password)
 reveal.pack(pady=5, padx=10)
 
+customtkinter.set_default_color_theme("green")
+checkbox = customtkinter.CTkCheckBox(master=frame, text="Emlékezz rám", variable=checkbox_var, command=save_state)
+checkbox.pack(pady=5, padx=10)
+
 button = customtkinter.CTkButton(master=frame, text="Bejelentkezés", command=lambda: login(entry1, entry2))
 button.pack(pady=5, padx=10)
 button.bind("<Button>", lambda: login(entry1, entry2))
@@ -116,10 +120,13 @@ label1 = customtkinter.CTkLabel(master=frame, text="Jelszó megváltoztatása", 
 label1.pack(pady=5, padx=10)
 label1.bind("<Button-1>", start_pwChange_script)
 
+label2 = customtkinter.CTkLabel(master=frame, text="Elfelejtett jelszó?", cursor="hand2")
+label2.pack(pady=5, padx=10)
+label2.bind("<Button-1>", start_pwChange_script)
+label2.configure(font=("Arial", 12))
 
-customtkinter.set_default_color_theme("green")
-checkbox = customtkinter.CTkCheckBox(master=frame, text="Emlékezz rám", variable=checkbox_var, command=save_state)
-checkbox.pack(pady=5, padx=10)
+
+
 
 
 #-------------------------------------------------HA van elmentve un és pw betölti a futtatás előtt----------------------------------------------------------------
@@ -127,7 +134,7 @@ checkbox.pack(pady=5, padx=10)
 
 def load_u_p():
     try:
-        with open("txt/usersSave.txt", "r+", encoding="utf-8") as f:
+        with open("usersSave.txt", "r+", encoding="utf-8") as f:
             # Split the line into username and password
             line = f.readline()
             if checkbox_var.get():
