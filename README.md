@@ -32,6 +32,7 @@ Rules apply to registration:
 - All fields must be filled in, nothing can be left blank.
 - The username must contain at least one letter.
 - Passwords must match.
+- The password can not be longer than 16 characters.
 - If it required, a random password can also be generated.
 - You cannot save data with the check mark, if the username or password is missing, or if these entrys length are smaller than 6 charater.
 - The password can be changed, if you click "jelszó megváltoztatása" label.
@@ -72,6 +73,7 @@ Szabályok vonatkoznak a regisztrációhoz:
 - Minden mezőt ki kell tölteni, nem lehet üresen hagyni semmit.
 - A felhasználónévnek muszáj tartalmazzon legalább egy betűt.
 - A jelszavaknak meg kell egyezzenek.
+- A jelszó nem lehet 16 karakternél hosszabb.
 - Igény esetén random jelszót is lehet generálni
 - Nem lehet elmenteni úgy adatot az "Emlékezz rám" gombbal, hogy csak felhasználónév, vagy jelszó van megadva, vagy ha eze ka mezők rövidebbek, mint 6 karakter.
 - A jelszó megváltoztatható, ha rákattintunk a "jelszó megváltoztatása" feliratra.

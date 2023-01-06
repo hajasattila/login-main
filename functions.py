@@ -44,6 +44,9 @@ def start_other_script(event):
 def start_pwChange_script(*event):
     subprocess.run(["python", "pwChange.py"])
     
+def start_pwReminder_script(*event):
+    subprocess.run(["python", "pwReminder.py"])
+    
 #Nem biztos még
 """ def start_mainmenu_script(event):
     subprocess.run(["python", "mainmenu.py"]) """

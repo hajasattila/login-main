@@ -88,6 +88,7 @@ frame.pack(pady=20, padx=60, fill="both", expand=True)
 
 label = customtkinter.CTkLabel(master=frame, text="Jelszó változtatás")
 label.pack(pady=10, padx=10)
+label.configure(font=("Arial", 20))
 
 entry1 = customtkinter.CTkEntry(master=frame, placeholder_text="Felhasználónév")
 entry1.pack(pady=10, padx=10)
