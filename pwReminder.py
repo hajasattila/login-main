@@ -43,8 +43,8 @@ def check_entries():
     except FileNotFoundError:
         pass
         
-        
-    if '@' not in email or (['.com', '.hu', '.org', '.net', '.biz', '.co'] not in email):
+    valid_endings = ['.com', '.hu', '.net', '.org', '.edu', '.gov', '.inf', '.biz', '@']
+    if not (any(ending in email for ending in valid_endings)) or len(email) < 6:
         tk.messagebox.showerror("Hiba!", "Kérlek valós e-mail címet írj be!")
         return
     
@@ -65,14 +65,19 @@ def check_entries():
     msg['From'] = sender
     msg['To'] = ', '.join(targets)
 
-    server = smtplib.SMTP_SSL(smtp_ssl_host, smtp_ssl_port)
-    server.login(username, password)
-    server.sendmail(sender, targets, msg.as_string())
-    server.quit()
+    try:
+        server = smtplib.SMTP_SSL(smtp_ssl_host, smtp_ssl_port)
+        server.login(username, password)
+        server.sendmail(sender, targets, msg.as_string())
+        server.quit()
+        
+        tk.messagebox.showinfo(
+            "Siker!", "Elküldtök az e-mailt!\nPerceken belül meg fog érkezni!")
+        root.destroy()
+    except Exception as e:
+        tk.messagebox.showerror("Hiba!", e)
     
-    tk.messagebox.showinfo(
-        "Siker!", "Elküldtök az e-mailt!\nPerceken belül meg fog érkezni!")
-    root.destroy()
+    
 
 
 #-------------------------------------------------Frontend----------------------------------------------------------------
