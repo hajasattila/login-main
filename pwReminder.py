@@ -7,6 +7,11 @@ import hashlib
 
 #-------------------------------------------------Alap beállítások----------------------------------------------------------------
 
+checkboxPath = "txt/checkbox.txt"
+smtpPath = "txt/smtp.txt"
+usersPath = "txt/users.txt"
+usersSavePath = "txt/usersSave.txt"
+loggedNamePath = "txt/loggedName.txt"
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("blue")
@@ -25,7 +30,7 @@ def check_entries():
     name = entry1.get()
     email = entry2.get()
     
-    with open("smtp.txt", "r") as f:
+    with open(smtpPath, "r") as f:
         hashed_password = f.read().strip()
         
 
@@ -34,8 +39,8 @@ def check_entries():
         return
     
     try:
-        with open("users.txt", "r") as f:
-            registered_users = f.read()
+        with open(usersPath, "r+", encoding="utf-8") as f:
+            registered_users = f.readlines()
             if name not in registered_users:
                 tk.messagebox.showerror(
                     "Hiba!", "Nem szerepel a nyilvántartásban ez a felhasználónév!")
@@ -63,7 +68,7 @@ def check_entries():
     msg = MIMEText('Megérkezett az új jelszavad! Belépésnél meg tudod majd változtatni!')
     msg['Subject'] = 'Jelszó emlékeztető'
     msg['From'] = sender
-    msg['To'] = ', '.join(targets)
+    msg['To'] = "".join(targets)
 
     try:
         server = smtplib.SMTP_SSL(smtp_ssl_host, smtp_ssl_port)

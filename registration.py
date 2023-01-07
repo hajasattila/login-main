@@ -7,6 +7,10 @@ import random
 
 #-------------------------------------------------Alap beállítások----------------------------------------------------------------
 
+checkboxPath = "txt/checkbox.txt"
+smtpPath = "txt/smtp.txt"
+usersPath = "txt/users.txt"
+usersSavePath = "txt/usersSave.txt"
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("blue")
@@ -27,9 +31,9 @@ def register():
     password = entry2.get()
     passwordagain = entry3.get()
 
-    if not os.path.exists("users.txt"):
+    if not os.path.exists(usersPath):
         # Create the file
-        with open("users.txt", "x", encoding="utf-8") as f:
+        with open(usersPath, "x", encoding="utf-8") as f:
             pass
     # Validate the input
     if not username or not password:
@@ -53,7 +57,7 @@ def register():
         return
 
     # Check if the username is already taken
-    with open("users.txt", "r+", encoding="utf-8") as f:
+    with open(usersPath, "r+", encoding="utf-8") as f:
         number = 1
         for line in f:
             number += 1
@@ -64,7 +68,7 @@ def register():
     # If the input is valid, write the user data to the file
     # titkosítás a jelszóhoz.
     password = hashlib.sha256(password.encode("utf-8")).hexdigest()
-    with open("users.txt", "a+", encoding="utf-8") as f:
+    with open(usersPath, "a+", encoding="utf-8") as f:
         f.write(f"{number}. Username: {username} , PW: {password}\n")
 
     # Clear the entry fields and show a success message

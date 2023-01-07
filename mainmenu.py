@@ -5,6 +5,10 @@ from tkinter import *   #vizualutás
 from functions import * #functionokat innen hívom meg
 
 #-------------------------------------------------Kinézet----------------------------------------------------------------
+checkboxPath = "txt/checkbox.txt"
+smtpPath = "txt/smtp.txt"
+usersPath = "txt/users.txt"
+usersSavePath = "txt/usersSave.txt"
 
 
 customtkinter.set_appearance_mode("dark")
@@ -32,11 +36,11 @@ def save_state():
     username = entry1.get()
     password = entry2.get()
     if len(username) >= 5 and len(password) >= 5:
-        with open("checkbox.txt", "w+", encoding="utf-8") as f:
+        with open(checkboxPath, "w+", encoding="utf-8") as f:
             f.write("1" if checkbox_var.get() else "0")
             # Save the username and password in the file
     try:
-        with open("usersSave.txt", "w+", encoding="utf-8") as f:
+        with open(usersSavePath, "w+", encoding="utf-8") as f:
             f.write(f"Username: {username} , PW: {password}\n")
             # Read the lines of the file
             line = f.readline()
@@ -50,7 +54,7 @@ def save_state():
                 line = f.readline()
             else:
                 # Write the username and password to the file if they do not already exist
-                with open("usersSave.txt", "a", encoding="utf-8") as f:
+                with open(usersSavePath, "a", encoding="utf-8") as f:
                     f.write(f"Username: {username} , PW: {password}\n")
     except FileNotFoundError:
         pass
@@ -71,7 +75,7 @@ def reveal_password():
 
 def load_state():
     try:
-        with open("checkbox.txt", "r+", encoding="utf-8") as f:
+        with open(checkboxPath, "r+", encoding="utf-8") as f:
             state = f.read()
             if state == "1":
                 checkbox_var.set(True)
@@ -106,7 +110,7 @@ customtkinter.set_default_color_theme("green")
 checkbox = customtkinter.CTkCheckBox(master=frame, text="Emlékezz rám", variable=checkbox_var, command=save_state)
 checkbox.pack(pady=5, padx=10)
 
-button = customtkinter.CTkButton(master=frame, text="Bejelentkezés", command=lambda: login(entry1, entry2))
+button = customtkinter.CTkButton(master=frame, text="Bejelentkezés", command=lambda: login(entry1, entry2, root))
 button.pack(pady=5, padx=10)
 button.bind("<Button>", lambda: login(entry1, entry2))
 
@@ -135,7 +139,7 @@ label2.configure(font=("Arial", 12))
 
 def load_u_p():
     try:
-        with open("usersSave.txt", "r+", encoding="utf-8") as f:
+        with open(usersSavePath, "r+", encoding="utf-8") as f:
             # Split the line into username and password
             line = f.readline()
             if checkbox_var.get():

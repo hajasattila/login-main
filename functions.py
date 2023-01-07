@@ -6,14 +6,21 @@ import hashlib
 
 #-------------------------------------------------Bejelentkezés----------------------------------------------------------------
 
-def login(e1, e2):
+checkboxPath = "txt/checkbox.txt"
+smtpPath = "txt/smtp.txt"
+usersPath = "txt/users.txt"
+usersSavePath = "txt/usersSave.txt"
+loggedNamePath = "txt/loggedName.txt"
+
+
+def login(e1, e2, root):
     print(type(e1))
 
     username = e1.get()
     # loginhoz a titkosított jelszót átalakítja, és összehasonlítja
     password = hashlib.sha256(e2.get().encode("utf-8")).hexdigest()
     # Open the file in read mode
-    with open("users.txt", "r+", encoding="utf8") as f:
+    with open(usersPath, "r+", encoding="utf8") as f:
         # Read the lines of the file
         line = f.readline()
         while line:
@@ -22,9 +29,10 @@ def login(e1, e2):
             # Check if the username and password match
             if u == username and p == password:
                 tk.messagebox.showinfo(
-                    "Siker!", "Sikerült belépni!")
-                e1.delete(0, "end")
-                e2.delete(0, "end")
+                    "Siker!", f"Sikerült belépni!\nÜdvözöllek {username}!")
+                createSession(u)
+                root.destroy()
+                start_loggedIn_script()
                 break
             line = f.readline()
         else:
@@ -46,6 +54,15 @@ def start_pwChange_script(*event):
     
 def start_pwReminder_script(*event):
     subprocess.run(["python", "pwReminder.py"])
+    
+def start_loggedIn_script():
+    subprocess.run(["python", "loggedIn.py"])
+    
+def createSession(uname):
+    with open(loggedNamePath, "w+", encoding="utf-8") as f:
+        f.write(uname)
+        f.seek(0)
+        print(f.read())
     
 #Nem biztos még
 """ def start_mainmenu_script(event):

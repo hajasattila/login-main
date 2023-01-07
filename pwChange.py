@@ -7,6 +7,11 @@ from functions import *
 
 #-------------------------------------------------Baisc settings----------------------------------------------------------------
 
+checkboxPath = "txt/checkbox.txt"
+smtpPath = "txt/smtp.txt"
+usersPath = "txt/users.txt"
+usersSavePath = "txt/usersSave.txt"
+loggedNamePath = "txt/loggedName.txt"
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("blue")
@@ -47,7 +52,7 @@ def pwChange(*event):
     # Hash the old password for comparison
     hashed_old_password = hashlib.sha256(oldPassword.encode("utf-8")).hexdigest()
 
-    with open("users.txt", "r", encoding="utf-8") as f:
+    with open(usersPath, "r", encoding="utf-8") as f:
         lines = f.readlines()
 
     # Check if the username and password match
@@ -63,7 +68,7 @@ def pwChange(*event):
         tk.messagebox.showerror("Hiba!", "Nem sikerült frissíteni a jelszót!")
         return
     
-    with open("users.txt", "w", encoding="utf-8") as f:
+    with open(usersPath, "w", encoding="utf-8") as f:
         f.writelines(lines)
     tk.messagebox.showinfo("Siker!", "Sikeresen frissült a jelszavad!")
     root.destroy()
