@@ -37,7 +37,7 @@ Rules apply to registration:
 - You cannot save data with the check mark, if the username or password is missing, or if these entrys length are smaller than 6 charater.
 - The password can be changed, if you click "jelszó megváltoztatása" label.
 - If you want to change your password, the same rules apply as for registration.
-- If you have forgotten your password, you can request an notification email by clicking on the 'Forgot password' label.
+- If you have forgotten your password, you can request an notification e-mail by clicking on the 'Forgot password' label.
 
 
 If something was wrong with the process, the program will send a warning or an error message.
@@ -79,12 +79,13 @@ Szabályok vonatkoznak a regisztrációhoz:
 - Nem lehet elmenteni úgy adatot az "Emlékezz rám" gombbal, hogy csak felhasználónév, vagy jelszó van megadva, vagy ha eze ka mezők rövidebbek, mint 6 karakter.
 - A jelszó megváltoztatható, ha rákattintunk a "jelszó megváltoztatása" feliratra.
 - Ha szeretnéd megváltoztatni jelszavad, ugyanazok a szabályok érvényesek, mint a regisztrációnál.
-- Ha elfelejtetted a jelszavad, kérhetsz e-mailben értesítőt az "Elfelejtett jelszó" labelra kattintva
+- Ha elfelejtetted a jelszavad, kérhetsz e-mailben értesítőt az "Elfelejtett jelszó" labelra kattintva.
 
 
 Ha valami hibás, akkor figyelmeztetést, vagy hiba üzenetet fog a program küldeni.
 
 
 Ha minden megfelelő, akkor a regisztráció, és a belépés is sikeres lesz!
+
 
 ------------------------------------------------------------------------------------------------------------------------
