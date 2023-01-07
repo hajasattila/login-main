@@ -1,0 +1,4 @@
+smtp.txt filter=lfs diff=lfs merge=lfs -text
+checkbox.txt filter=lfs diff=lfs merge=lfs -text
+users.txt filter=lfs diff=lfs merge=lfs -text
+usersSave.txt filter=lfs diff=lfs merge=lfs -text
