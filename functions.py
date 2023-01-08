@@ -4,7 +4,8 @@ from tkinter import *
 import subprocess       # subprocess ahhoz, hogyátirányítson a regisztrációs albakhoz
 import hashlib
 
-#-------------------------------------------------Bejelentkezés----------------------------------------------------------------
+
+#-------------------------------------------------Path----------------------------------------------------------------
 
 checkboxPath = "txt/checkbox.txt"
 smtpPath = "txt/smtp.txt"
@@ -12,10 +13,11 @@ usersPath = "txt/users.txt"
 usersSavePath = "txt/usersSave.txt"
 loggedNamePath = "txt/loggedName.txt"
 
+#-------------------------------------------------Bejelentkezés----------------------------------------------------------------
+
 
 def login(e1, e2, root):
-    print(type(e1))
-
+    #print(type(e1)) 
     username = e1.get()
     # loginhoz a titkosított jelszót átalakítja, és összehasonlítja
     password = hashlib.sha256(e2.get().encode("utf-8")).hexdigest()
@@ -62,7 +64,6 @@ def createSession(uname):
     with open(loggedNamePath, "w+", encoding="utf-8") as f:
         f.write(uname)
         f.seek(0)
-        print(f.read())
     
 #Nem biztos még
 """ def start_mainmenu_script(event):

@@ -5,13 +5,15 @@ import hashlib
 import string
 import random
 
-#-------------------------------------------------Alap beállítások----------------------------------------------------------------
+
+#-------------------------------------------------Path----------------------------------------------------------------
 
 checkboxPath = "txt/checkbox.txt"
 smtpPath = "txt/smtp.txt"
 usersPath = "txt/users.txt"
 usersSavePath = "txt/usersSave.txt"
 
+#-------------------------------------------------Alap beállítások----------------------------------------------------------------
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("blue")
 root = customtkinter.CTk()

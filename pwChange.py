@@ -5,13 +5,14 @@ import hashlib
 from functions import *
 
 
-#-------------------------------------------------Baisc settings----------------------------------------------------------------
+#-------------------------------------------------Path----------------------------------------------------------------
 
 checkboxPath = "txt/checkbox.txt"
 smtpPath = "txt/smtp.txt"
 usersPath = "txt/users.txt"
 usersSavePath = "txt/usersSave.txt"
-loggedNamePath = "txt/loggedName.txt"
+
+#-------------------------------------------------Baisc settings----------------------------------------------------------------
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("blue")

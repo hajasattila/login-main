@@ -4,13 +4,14 @@ import re               # regural expression a jelszavakhoz
 from tkinter import *   #vizualutás
 from functions import * #functionokat innen hívom meg
 
-#-------------------------------------------------Kinézet----------------------------------------------------------------
+#-------------------------------------------------Path----------------------------------------------------------------
+
 checkboxPath = "txt/checkbox.txt"
 smtpPath = "txt/smtp.txt"
 usersPath = "txt/users.txt"
 usersSavePath = "txt/usersSave.txt"
 
-
+#-------------------------------------------------Kinézet----------------------------------------------------------------
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("green")
 root = customtkinter.CTk()
