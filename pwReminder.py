@@ -4,6 +4,9 @@ from tkinter import *
 import smtplib
 from email.mime.text import MIMEText
 import re
+import string
+import random
+import hashlib
 
 #-------------------------------------------------PATH----------------------------------------------------------------
 
@@ -25,6 +28,16 @@ root.iconbitmap(r'images/favicon.ico')
 
 #-------------------------------------------------Function----------------------------------------------------------------
 
+
+def generate_password():
+    characters = string.ascii_letters + string.digits
+    password_length = random.randint(6, 16)
+    password = ''.join(random.choice(characters)for i in range(password_length))
+    return password
+
+global newPassword
+newPassword = generate_password()
+
 #basic check stuff
 def check_entries():
     global name
@@ -42,23 +55,47 @@ def check_entries():
         return
 
     try:
-        with open(usersPath, "r+", encoding="utf8") as f:
+        with open(usersPath, "r+", encoding="utf-8") as f:
             line = f.readline()
             while line:
                 u, p = re.findall(r"Username: (\w+) , PW: (\w+)", line)[0]
                 if u == name and p:
                     send()
+                    break
                 line = f.readline()
             else:
-                tk.messagebox.showerror(
-                    "Hiba!", "Nem szerepel nyilvántartásban ez a felhasználónév!")
+                tk.messagebox.showerror("Hiba!", "Nem szerepel nyilvántartásban ez a felhasználónév!")
     except FileNotFoundError:
         pass
+    
+#-------------------------------------------------pwChange----------------------------------------------------------------
+
+def pwChange(*event):
+    with open(usersPath, "r+", encoding="utf-8") as f:
+        lines = f.readlines()
+        number = 0
+        # Check if the username and password match
+        for i, line in enumerate(lines):
+            number += 1
+            u, p = re.findall(r"Username: (\w+) , PW: (\w+)", line)[0]
+            if u == name and p:
+                # Hash the new password
+                hashed_new_password = hashlib.sha256(newPassword.encode("utf-8")).hexdigest()
+                lines[i] = f"{number}. Username: {name} , PW: {hashed_new_password}\n"
+                break
+        else:
+            tk.messagebox.showerror("Hiba!", "Nem sikerült frissíteni a jelszót!")
+            return
+        
+        with open(usersPath, "w+", encoding="utf-8") as f:
+            f.writelines(lines)
+    
 #-------------------------------------------------email sending----------------------------------------------------------------
 def send():
-    with open(smtpPath, "r") as f:
+    
+    with open(smtpPath, "r+") as f:
         hashed_password = f.read().strip()
-        
+    
     smtp_ssl_host = 'smtp.gmail.com'  # smtp.mail.yahoo.com
     smtp_ssl_port = 465
     username = 'hajasatlasz@gmail.com'
@@ -67,11 +104,13 @@ def send():
     targets = entry2.get()
 
     msg = MIMEText(
-        f'Kedves {name}!\nMegérkezett az új jelszavad!\n\nBelépésnél meg tudod majd változtatni!\nÜdvözlettel, \n\tHajas Attila István')
+        f'Kedves {name}!\nMegérkezett az új jelszavad!\nAz új jelszavad: \t" {newPassword} " \nBelépésnél meg tudod majd változtatni!\nÜdvözlettel, \n\tHajas Attila István')
     msg['Subject'] = 'Jelszó emlékeztető'
     msg['From'] = sender
     msg['To'] = "".join(targets)
 
+    pwChange()
+    
     try:
         server = smtplib.SMTP_SSL(smtp_ssl_host, smtp_ssl_port)
         server.login(username, password)
@@ -83,7 +122,6 @@ def send():
         root.destroy()
     except Exception as e:
         tk.messagebox.showerror("Hiba!", e)
-
 
 #-------------------------------------------------Frontend----------------------------------------------------------------
 frame = customtkinter.CTkFrame(master=root)

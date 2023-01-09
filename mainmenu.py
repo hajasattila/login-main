@@ -4,7 +4,7 @@ import re               # regural expression a jelszavakhoz
 from tkinter import *   #vizualutás
 from functions import * #functionokat innen hívom meg
 
-#-------------------------------------------------Path----------------------------------------------------------------
+#---------------------------------------------  ----Path----------------------------------------------------------------
 
 checkboxPath = "txt/checkbox.txt"
 smtpPath = "txt/smtp.txt"
