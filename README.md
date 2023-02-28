@@ -62,7 +62,7 @@ A programban szereplő könyvtárak, amikkel dolgozom:
     string -> stringekkel komplexebb műveletek
     random -> random hosszúságok, és jelszavak generálása
 
-Ha ezek nincsenek telepítve, a program nem futtatható a szerkesztőből.
+**Ha ezek nincsenek telepítve, a program nem futtatható a szerkesztőből.**
 
 Telepítési parancs:    
     
